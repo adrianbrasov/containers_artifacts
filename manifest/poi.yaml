@@ -37,7 +37,7 @@ metadata:
   name: poi
 spec:
   selector:
-    app.kubernetes.io/name: poi
+    app: poi
   ports:
   - protocol: TCP
     port: 8080
