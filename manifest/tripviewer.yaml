@@ -20,6 +20,11 @@ spec:
         envFrom:
         - secretRef:
             name: sql-credentials
+        env:
+        - name: USERPROFILE_API_ENDPOINT
+          value: "http://userprofile:8080"
+        - name: TRIPS_API_ENDPOINT
+          value: "http://trips:8080"
         resources:
           requests:
             cpu: 100m
