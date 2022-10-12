@@ -1,0 +1,65 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: trip-gateway
+spec:
+  selector:
+    istio: ingress # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: tripinsights
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - trip-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/user/
+    route:
+    - destination:
+        host: userprofile.api-ns.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /api/user-java/
+    route:
+    - destination:
+        host: user-java.api-ns.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /api/trips/
+    route:
+    - destination:
+        host: trips.api-ns.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /api/poi/
+    route:
+    - destination:
+        host: poi.api-ns.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: tripviewer.web-ns.svc.cluster.local
+        port:
+          number: 8080
