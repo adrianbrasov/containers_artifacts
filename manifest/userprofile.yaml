@@ -18,9 +18,6 @@ spec:
       containers:
       - name: userprofile
         image: registryhis6869.azurecr.io/tripinsights/userprofile:1.0
-        envFrom:
-        - secretRef:
-            name: sql-credentials
         resources:
           requests:
             cpu: 100m
@@ -31,6 +28,17 @@ spec:
         ports:
         - containerPort: 80
           name: userprofile
+        volumeMounts:
+        - name: api-secrets-volume
+          mountPath: "/secrets"
+          readOnly: true
+      volumes:
+        - name: api-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "api-secrets-kv"          
 ---
 apiVersion: v1
 kind: Service
