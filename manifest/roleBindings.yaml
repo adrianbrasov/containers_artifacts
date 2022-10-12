@@ -1,6 +1,6 @@
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: api-dev-edit-to-api
   namespace: api-ns
@@ -15,7 +15,7 @@ roleRef:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: api-dev-view-to-web
   namespace: web-ns
@@ -30,7 +30,7 @@ roleRef:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: web-dev-edit-to-web
   namespace: web-ns
@@ -45,7 +45,7 @@ roleRef:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: web-dev-view-to-api
   namespace: api-ns
