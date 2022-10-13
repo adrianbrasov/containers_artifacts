@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-deployment
+  namespace: api-ns
+  labels:
+    deploy: insurance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insurance
+  template:
+    metadata:
+      labels:
+        app: insurance
+    spec:
+      containers:
+      - image: "registryhis6869.azurecr.io/insurance:1.0"
+        imagePullPolicy: Always
+        name: insurance
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2G
+          limits:
+            cpu: 2
+            memory: 4G
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insurance
+  namespace: api-ns
+spec:
+  type: ClusterIP
+  selector:
+    app: insurance
+  ports:
+  - protocol: TCP
+    name: insurance-http
+    port: 80
+    targetPort: 8081
