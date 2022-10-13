@@ -6,7 +6,7 @@ metadata:
   labels: 
     app.kubernetes.io/name: userprofile
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: userprofile
