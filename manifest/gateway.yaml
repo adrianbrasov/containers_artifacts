@@ -24,7 +24,7 @@ spec:
   - trip-gateway
   http:
   - match:
-    - uri:
+    - uri: 
         prefix: /api/user/
     route:
     - destination:
