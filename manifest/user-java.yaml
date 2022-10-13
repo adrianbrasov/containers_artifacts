@@ -31,6 +31,17 @@ spec:
         ports:
         - containerPort: 80
           name: user-java
+        volumeMounts:
+        - name: api-secrets-volume
+          mountPath: "/secrets"
+          readOnly: true
+      volumes:
+        - name: api-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "api-secrets-kv"
 ---
 apiVersion: v1
 kind: Service
